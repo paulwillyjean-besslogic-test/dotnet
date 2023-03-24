@@ -9,8 +9,13 @@ public class Aircraft
 {
     [Key]
     public long RegistrationNumber { get; set; }
-    public string SerialNumber { get; set; } = String.Empty;
-    public string ModelName { get; set; } = String.Empty;
-    public RegistrationStatus RegistrationStatus { get; set; } = RegistrationStatus.Pending;
-    public DateTime RegistrationDate { get; set; } = DateTime.Now;
+    [Required]
+    public required string SerialNumber { get; set; }
+    [Required]
+    public required string ModelName { get; set; }
+    [Required]
+    public required RegistrationStatus RegistrationStatus { get; set; }
+    [Required]
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    public DateTime RegistrationDate { get; set; }
 }

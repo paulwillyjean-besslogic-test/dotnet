@@ -12,7 +12,9 @@ builder.Services.AddControllers()
         opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 builder.Services.AddDbContext<AircraftContext>(opt => {
-    opt.UseMySQL(builder.Configuration.GetConnectionString("DefaultDb") ?? throw new Exception("Connection string is empty."));
+    string? connectionString = builder.Configuration.GetConnectionString("DefaultDb");
+    Console.WriteLine(connectionString);
+    opt.UseSqlServer(connectionString ?? throw new Exception("Connection string is empty."));
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
